@@ -5,66 +5,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مكتبة أورا الذهبية | Aura Books</title>
     <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --text-color: #4a403a;
+            --card-bg: #ffffff;
+            --border-color: #f0eae1;
+            --header-color: #3b302a;
+            --subtitle-color: #7a6ab5;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121214;
+            --text-color: #e0dcd5;
+            --card-bg: #1e1e24;
+            --border-color: #2c2c35;
+            --header-color: #f4eee1;
+            --subtitle-color: #9d8df1;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
         body {
-            background-color: #fdfbf7;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: Tahoma, sans-serif;
-            color: #4a403a;
             margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: right;
+            transition: background-color 0.6s ease, color 0.6s ease;
         }
+
+        /* شاشة عتبة الباب المسحورة (البداية) */
+        #welcome-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #welcome-gate h2 {
+            font-size: 28px;
+            color: var(--header-color);
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .top-controls {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .magic-btn {
+            background: var(--subtitle-color);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .magic-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
         header {
-            margin-top: 40px;
-            margin-bottom: 40px;
+            max-width: 800px;
+            margin: 20px auto 40px auto;
         }
+
         h1 {
             font-size: 38px;
-            color: #3b302a;
+            color: var(--header-color);
             margin-bottom: 10px;
         }
+
         .subtitle {
             font-size: 16px;
-            color: #7a6ab5;
+            color: var(--subtitle-color);
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            text-align: right;
         }
+
         .section-card {
-            background: #ffffff;
-            border: 1px solid #f0eae1;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background-color 0.5s ease;
+            position: relative;
         }
+
+        .section-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
         .section-card h2 {
             font-size: 20px;
-            color: #5c4d44;
+            color: var(--header-color);
             margin-top: 0;
-            border-bottom: 2px solid #F7F3ec;
-            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
         }
+
         ul {
             padding-right: 20px;
-            margin: 10px 0;
+            margin: 15px 0;
         }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-size: 15px;
-            color: #6b5f56;
+            line-height: 1.6;
         }
+
+        /* بوصلة المزاج القرائي */
+        .mood-box, .wish-box, .whisper-box {
+            background: linear-gradient(135deg, #7a6ab5, #b8a9fc);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(122, 106, 181, 0.3);
+        }
+
+        .mood-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .mood-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .mood-btn:hover {
+            background: white;
+            color: #7a6ab5;
+        }
+
+        #mood-result {
+            margin-top: 15px;
+            font-size: 15px;
+            font-style: italic;
+        }
+
+        #quote-display {
+            font-style: italic;
+            font-size: 16px;
+            margin: 15px 0;
+            min-height: 40px;
+        }
+
+        /* ممر المخطوطات السرية */
+        .easter-egg-clue {
+            font-size: 12px;
+            color: var(--subtitle-color);
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* أختام القارئ */
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(122, 106, 181, 0.1);
+            border: 1px dashed var(--subtitle-color);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
         footer {
-            margin-top: 40px;
+            max-width: 800px;
+            margin: 40px auto 0 auto;
             font-size: 14px;
-            color: #8c7d73;
-            border-top: 1px solid #eee5dc;
-            padding-top: 15px;
+            color: var(--subtitle-color);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body dir="rtl">
+
+    <!-- 1. عتبة الباب المسحورة -->
+    <div id="welcome-gate">
+        <h2 id="typewriter-text"></h2>
+        <button class="magic-btn" style="font-size: 18px; padding: 12px 30px;" onclick="enterLibrary()">🚪 اطرق الباب وادخل المكتبة</button>
+    </div>
+
+    <!-- أزرار التحكم السحرية -->
+    <div class="top-controls">
+        <button class="magic-btn" onclick="toggleTheme()">🌙 الوضع الليلي السحري</button>
+        <button class="magic-btn" onclick="toggleAmbientSound()">🌧️ صوت المطر الهادئ</button>
+        <span id="clock-status" style="font-size: 13px; color: var(--subtitle-color);">⏰ سكون منتصف الليل نشط</span>
+    </div>
 
     <header>
         <h1>📖 أورا Books</h1>
@@ -72,24 +248,148 @@
     </header>
 
     <div class="container">
+        
+        <!-- 2. بوصلة المزاج القرائي -->
+        <div class="mood-box">
+            <h3>🧭 بوصلة المزاج القرائي</h3>
+            <p>كيف تحس في هذه اللحظة؟ اختر مزاجك لنقترح لك عوالم تناسبك:</p>
+            <div class="mood-buttons">
+                <button class="mood-btn" onclick="setMood('hadi')">هادئ 🍃</button>
+                <button class="mood-btn" onclick="setMood('dreamy')">حالم ✨</button>
+                <button class="mood-btn" onclick="setMood('mystic')">غامض 🔮</button>
+            </div>
+            <div id="mood-result">"اختر مزاجك بالأعلى لتبدأ الرحلة..."</div>
+        </div>
+
+        <!-- 3. ركن الأمنيات السحري -->
+        <div class="wish-box" style="background: linear-gradient(135deg, #5c4d44, #8c7d73);">
+            <h3>✨ بوابتك العشوائية لعوالم الكتب</h3>
+            <div id="quote-display">"اضغط على الزر أدناه لتستمع لرسالة الكتاب اليوم لك..."</div>
+            <button class="magic-btn" style="background: white; color: #5c4d44; font-weight: bold;" onclick="getRandomQuote()">اسحب رسالة سحرية</button>
+        </div>
+
         <!-- القسم الأول -->
         <div class="section-card">
             <h2>✨ مكتبة المخطوطات المفقودة</h2>
             <ul>
                 <li><strong>رائحة العطر قبل أن يسقط:</strong> كتاب عن ذكريات الطفولة والأماكن القديمة التي لا تعود.</li>
-                <li><strong>سمعات تفاعلية لههدة صخب العقل:</strong> دليل هروب من زحمة الأفكار في منتصف الليل.</li>
+                <li><strong>سماعات تفاعلية لتهدئة صخب العقل:</strong> دليل هروب من زحمة الأفكار في منتصف الليل.</li>
             </ul>
+            <span class="easter-egg-clue" onclick="revealSecret('secret1')">🔍 (انقر هنا لاكتشاف تعويذة سرية مخفية)</span>
+            <div id="secret1" style="display:none; color: var(--subtitle-color); font-size: 13px; margin-top: 5px;">📜 تعويذة المخطوطة: "الكلمات الصادقة لا تموت، بل تسكن بين السطور الأبدية."</div>
         </div>
 
         <!-- القسم الثاني -->
         <div class="section-card">
             <h2>📜 عوالم موازية لم نمسها قط</h2>
             <ul>
-                <li><strong>مدونة شخص عاش في القرن التاسع عشر:</strong> بتفصيل يمكن عن مستقبلنا الذي نعيشه اليوم.</li>
+                <li><strong>مدونة شخص عاش في القرن التاسع عشر:</strong> بتفصيل يروي مستقبلنا الذي نعيشه اليوم.</li>
                 <li><strong>يوميات قط يراقب أصحابه بصمت:</strong> فلسفة عميقة وساخرة من الحياة من منظور قط منزلي.</li>
             </ul>
         </div>
+
+        <!-- أختام القارئ السحرية -->
+        <div class="section-card" style="text-align: center;">
+            <h2 style="border: none;">🏆 أختام صائد العوالم</h2>
+            <p style="font-size: 14px; margin: 0;">أنت الآن تمتلك الشارات التالية في سجلك السحري:</p>
+            <div class="badges-container">
+                <span class="badge">📖 قارئ البدايات</span>
+                <span class="badge">🌙 ساهر منتصف الليل</span>
+                <span class="badge">✨ مستكشف الأسرار</span>
+            </div>
+        </div>
+
     </div>
 
+    <footer>
+        صُنِع بكل شغف في عوالم أورا الخيالية ✨
+    </footer>
+
+    <audio id="rain-audio" loop src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg"></audio>
+
+    <script>
+        // تأثير الكتابة التلقائية لعتبة الباب
+        const textToType = "مرحباً بك في عالم أورا الخفي.. حيث تُكتب الأماني قبل السطور.";
+        let i = 0;
+        function typeWriter() {
+            if (i < textToType.length) {
+                document.getElementById("typewriter-text").innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        window.onload = typeWriter;
+
+        function enterLibrary() {
+            const gate = document.getElementById("welcome-gate");
+            gate.style.opacity = "0";
+            setTimeout(() => { gate.style.display = "none"; }, 800);
+        }
+
+        // ساعة منتصف الليل التلقائية
+        const hour = new Date().getHours();
+        if (hour >= 20 || hour < 6) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            document.getElementById("clock-status").innerText = "🌙 أجواء منتصف الليل مفعلة تلقائياً";
+        }
+
+        // الوضع الليلي اليدوي
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute("data-theme");
+            if (currentTheme === "dark") {
+                html.removeAttribute("data-theme");
+                event.target.innerText = "🌙 الوضع الليلي السحري";
+            } else {
+                html.setAttribute("data-theme", "dark");
+                event.target.innerText = "☀️ عودة لضوء النهار";
+            }
+        }
+
+        // أصوات المطر
+        let isPlaying = false;
+        function toggleAmbientSound() {
+            const audio = document.getElementById("rain-audio");
+            if (!isPlaying) {
+                audio.play().catch(e => console.log("الصوت محظور"));
+                event.target.innerText = "🔇 إيقاف صوت المطر";
+                isPlaying = true;
+            } else {
+                audio.pause();
+                event.target.innerText = "🌧️ صوت المطر الهادئ";
+                isPlaying = false;
+            }
+        }
+
+        // بوصلة المزاج
+        function setMood(mood) {
+            const resultBox = document.getElementById("mood-result");
+            if (mood === 'hadi') {
+                resultBox.innerText = "🍃 مزاجك هادئ: ننصحك بقراءة 'يوميات قط يراقب أصحابه بصمت' لتستمتع بالسكينة المطلقة.";
+            } else if (mood === 'dreamy') {
+                resultBox.innerText = "✨ مزاجك حالم: ننصحك بـ 'رائحة العطر قبل أن يسقط' لتعيش ذكريات الأماكن القديمة.";
+            } else if (mood === 'mystic') {
+                resultBox.innerText = "🔮 مزاجك غامض: ننصحك بـ 'سماعات لتهدئة صخب العقل' في هذا الوقت المتأخر.";
+            }
+        }
+
+        // اقتباسات عشوائية
+        const quotes = [
+            "“الكتب هي الطائرات والقطارات والشارع.. إنها الوجهة والرحلة معاً.”",
+            "“هناك كتب تُقرأ لتنسى العالم، وكتاب واحد يُقرأ لتكتشف نفسك فيه.”",
+            "“في منتصف الليل، تصبح الكلمات أقوى من أي جيش جبار.”",
+            "“بعض الصفحات تطويها بيدك، وبعضها تطوي عمرك بأكمله.”"
+        ];
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quote-display").innerText = quotes[randomIndex];
+        }
+
+        // كشف المخطوطة السرية
+        function revealSecret(id) {
+            const secret = document.getElementById(id);
+            secret.style.display = secret.style.display === "none" ? "block" : "none";
+        }
+    </script>
 </body>
 </html>
